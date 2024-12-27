@@ -67,7 +67,7 @@ chain_input = {
     "messages": [
         {
             "role": "user",
-            "content": "What is RAG?", # Replace with a question relevant to your use case
+            "content": "Do I have to stop at railroad crossings?", # Replace with a question relevant to your use case
         }
     ]
 }
@@ -103,6 +103,14 @@ Your inputs are invaluable for the development team. By providing detailed feedb
 Thank you for your time and effort in testing {RAG_APP_NAME}. Your contributions are essential to delivering a high-quality product to our end users."""
 
 print(instructions_to_reviewer)
+
+# COMMAND ----------
+
+# Use Unity Catalog to log the chain
+mlflow.set_registry_uri('databricks-uc')
+
+# Register the chain to UC
+uc_registered_model_info = mlflow.register_model(model_uri=logged_chain_info.model_uri, name=UC_MODEL_NAME)
 
 # COMMAND ----------
 
