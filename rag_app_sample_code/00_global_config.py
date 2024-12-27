@@ -34,8 +34,8 @@ RAG_APP_NAME = 'my_agent_app'
 
 # UC Catalog & Schema where outputs tables/indexs are saved
 # If this catalog/schema does not exist, you need create catalog/schema permissions.
-UC_CATALOG = f'{user_name}_catalog'
-UC_SCHEMA = f'rag_{user_name}'
+UC_CATALOG = f'ps_ci_cd'
+UC_SCHEMA = f'default'
 
 ## UC Model name where the POC chain is logged
 UC_MODEL_NAME = f"{UC_CATALOG}.{UC_SCHEMA}.{RAG_APP_NAME}"
@@ -46,7 +46,7 @@ VECTOR_SEARCH_ENDPOINT = f'{user_name}_vector_search'
 
 # Source location for documents
 # You need to create this location and add files
-SOURCE_PATH = f"/Volumes/{UC_CATALOG}/{UC_SCHEMA}/source_docs"
+SOURCE_PATH = f"/Volumes/mind_constructor/default/utah_code"
 
 ############################
 ##### We suggest accepting these defaults unless you need to change them. ######
