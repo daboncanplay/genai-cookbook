@@ -455,6 +455,13 @@ print(f"Gold Delta Table w/ chunked files: {get_table_url(destination_tables_con
 
 # COMMAND ----------
 
+index = vsc.get_index(endpoint_name="daboncanplay_vector_search", index_name="ps_ci_cd.default.my_agent_app_poc_chunked_docs_gold_index")
+
+
+index.similarity_search(columns=["chunked_text", "chunk_id", "path"], query_text="Do I need a license to sell insurance?")["result"]["data_array"][0][2]
+
+# COMMAND ----------
+
 # DBTITLE 1,Testing the Index
 index.similarity_search(columns=["chunked_text", "chunk_id", "path"], query_text="Can I turn right on a red light?")
 

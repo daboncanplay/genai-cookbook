@@ -16,6 +16,21 @@ w = WorkspaceClient()
 
 # COMMAND ----------
 
+chain_input = {
+    "messages": [
+        {
+            "role": "user",
+            "content": "Can I turn right on a red light?", 
+        }
+    ]
+}
+chain_name = "models:/ps_ci_cd.default.my_agent_app@Champion"
+champion_chain = mlflow.langchain.load_model(chain_name)
+results = champion_chain.invoke(chain_input)
+print(results)
+
+# COMMAND ----------
+
 # MAGIC %run ./00_config
 
 # COMMAND ----------
