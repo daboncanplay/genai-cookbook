@@ -16,21 +16,6 @@ w = WorkspaceClient()
 
 # COMMAND ----------
 
-chain_input = {
-    "messages": [
-        {
-            "role": "user",
-            "content": "Can I turn right on a red light?", 
-        }
-    ]
-}
-chain_name = "models:/ps_ci_cd.default.my_agent_app@Champion"
-champion_chain = mlflow.langchain.load_model(chain_name)
-results = champion_chain.invoke(chain_input)
-print(results)
-
-# COMMAND ----------
-
 # MAGIC %run ./00_config
 
 # COMMAND ----------
@@ -128,21 +113,21 @@ mlflow.set_registry_uri('databricks-uc')
 uc_registered_model_info = mlflow.register_model(model_uri=logged_chain_info.model_uri, name=UC_MODEL_NAME)
 
 # Deploy to enable the Review APP and create an API endpoint
-deployment_info = agents.deploy(model_name=UC_MODEL_NAME, model_version=uc_registered_model_info.version)
+# deployment_info = agents.deploy(model_name=UC_MODEL_NAME, model_version=uc_registered_model_info.version)
 
-browser_url = mlflow.utils.databricks_utils.get_browser_hostname()
-print(f"\n\nView deployment status: https://{browser_url}/ml/endpoints/{deployment_info.endpoint_name}")
+# browser_url = mlflow.utils.databricks_utils.get_browser_hostname()
+# print(f"\n\nView deployment status: https://{browser_url}/ml/endpoints/{deployment_info.endpoint_name}")
 
-# Add the user-facing instructions to the Review App
-agents.set_review_instructions(UC_MODEL_NAME, instructions_to_reviewer)
+# # Add the user-facing instructions to the Review App
+# agents.set_review_instructions(UC_MODEL_NAME, instructions_to_reviewer)
 
-# Wait for the Review App to be ready
-print("\nWaiting for endpoint to deploy.  This can take 15 - 20 minutes.", end="")
-while w.serving_endpoints.get(deployment_info.endpoint_name).state.ready == EndpointStateReady.NOT_READY or w.serving_endpoints.get(deployment_info.endpoint_name).state.config_update == EndpointStateConfigUpdate.IN_PROGRESS:
-    print(".", end="")
-    time.sleep(30)
+# # Wait for the Review App to be ready
+# print("\nWaiting for endpoint to deploy.  This can take 15 - 20 minutes.", end="")
+# while w.serving_endpoints.get(deployment_info.endpoint_name).state.ready == EndpointStateReady.NOT_READY or w.serving_endpoints.get(deployment_info.endpoint_name).state.config_update == EndpointStateConfigUpdate.IN_PROGRESS:
+#     print(".", end="")
+#     time.sleep(30)
 
-print(f"\n\nReview App: {deployment_info.review_app_url}")
+# print(f"\n\nReview App: {deployment_info.review_app_url}")
 
 # COMMAND ----------
 
